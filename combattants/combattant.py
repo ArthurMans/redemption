@@ -1,7 +1,8 @@
 class Combattant:
 
-    def __init__(self, pv):
+    def __init__(self, pv, nom):
         self.pv = pv
+        self.nom = nom
         #self.robustesse
         #self.puissance
         #self.endurance
@@ -10,4 +11,4 @@ class Combattant:
         #self.parade
 
     def afficher_combattant(self):
-        print("pv :",self.pv)
+        print("nom :",self.nom,"||  pv :",self.pv)
