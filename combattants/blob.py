@@ -1,4 +1,4 @@
-from combattant import Combattant
+from combattants.combattant import Combattant
 
 class Blob(Combattant):
 
@@ -6,7 +6,4 @@ class Blob(Combattant):
         self.pv = 30
         self.nom = 'Blob'
 
-    def afficher_combattant(self,nom):
-        self.nom = nom
-        print("nom :",self.nom)
 

@@ -5,7 +5,7 @@ from combattants.blob import Blob
 pygame.init()
 
 pygame.display.set_caption("Redemption")
-pygame.display.setmode((1080, 720))
+pygame.display.set_mode((1080, 720))
 running = True
 
 while running:
