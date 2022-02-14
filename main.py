@@ -16,10 +16,12 @@ running = True
 while running:
 
     ecran.blit(arriere_plan,(0,0))
-    ecran.blit(jeu.joueur.image,jeu.joueur.rect)
+    ecran.blit(jeu.combattant.image,jeu.combattant.rect)
+    jeu.combattant.all_projectiles.draw(ecran)
+
+    #mettre à jour l'ecran
     pygame.display.flip()
 
-    jeu.combattant.all_projectiles.draw(screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -27,12 +29,13 @@ while running:
             pygame.quit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
-                jeu.joueur.bouger_a_droite()
+                jeu.combattant.bouger_a_droite()
             elif event.key == pygame.K_LEFT:
-                jeu.joueur.bouger_a_gauche()
+                jeu.combattant.bouger_a_gauche()
             elif event.key == pygame.K_UP:
-                jeu.joueur.bouger_en_haut()
+                jeu.combattant.bouger_en_haut()
             elif event.key == pygame.K_DOWN:
-                jeu.joueur.bouger_en_bas()
+                jeu.combattant.bouger_en_bas()
             if event.key == pygame.K_SPACE:
+                print("bdf")
                 jeu.combattant.lancer_projectile()

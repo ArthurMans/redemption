@@ -4,4 +4,4 @@ from combattants.combattant import Combattant
 class Jeu:
 
     def __init__(self):
-        self.joueur = Combattant()
+        self.combattant = Combattant()
