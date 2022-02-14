@@ -10,7 +10,13 @@ running = True
 
 while running:
 
+    jeu.combattant.all_projectiles.draw(screen)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
+
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                jeu.combattant.lancer_projectile()
