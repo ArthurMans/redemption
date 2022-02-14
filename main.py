@@ -1,11 +1,16 @@
+import pygame
 from combattants.combattant import Combattant
 from combattants.blob import Blob
 
-antoine = Combattant(50,'Antoine')
-arthur = Combattant(30,'Arthur')
-antoinee = Blob()
-antoine.afficher_combattant()
-arthur.afficher_combattant()
-antoinee.afficher_combattant()
+pygame.init()
 
-print("La mere d'Antoine est gentille")
+pygame.display.set_caption("Redemption")
+pygame.display.setmode((1080, 720))
+running = True
+
+while running:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            pygame.quit()
