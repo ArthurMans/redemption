@@ -39,8 +39,6 @@ while running:
     jeu.heros.all_projectiles.draw(ecran)
 
 
-
-
     pygame.display.flip()
 
     for event in pygame.event.get():
