@@ -1,4 +1,5 @@
 import pygame
+from definition import *
 
 class Projectile(pygame.sprite.Sprite):
 
@@ -20,3 +21,22 @@ class Projectile(pygame.sprite.Sprite):
         else:
             self.rect.x = combattant.rect.x - self.image.get_width()
             self.rect.y = combattant.rect.y + (self.hauteur_image_combattant / 3)
+
+        self.combattant = combattant
+
+    def remove(self):
+        self.combattant.all_projectiles.remove(self)
+
+    def move(self):
+        if self.combattant.est_allié:
+            self.rect.x += self.velocity
+
+            #verifie si le projectile n'est plus sur l'ecran
+            if self.rect.x > largeur_ecran:
+                self.remove()
+        else:
+            self.rect.x -= self.velocity
+
+            # verifie si le projectile n'est plus sur l'ecran
+            if self.rect.x < 0:
+                self.remove()
