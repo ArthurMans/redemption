@@ -24,7 +24,7 @@ while running:
     ecran.blit(jeu.combattant.image, jeu.combattant.rect)
 
     # actualisère barre de PV
-    for combattant in jeu.tout_combattants:
+    for element in jeu.tout_combattants:
         jeu.combattant.update_barre_de_vie(ecran)
 
     #recuperer projectile du combattant
@@ -44,6 +44,9 @@ while running:
             running = False
             pygame.quit()
         elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                running = False
+                pygame.quit()
             if event.key == pygame.K_RIGHT and jeu.combattant.rect.x + jeu.combattant.rect.width < ecran.get_width():
                 jeu.combattant.bouger_a_droite()
             elif event.key == pygame.K_LEFT and jeu.combattant.rect.x > 0:
