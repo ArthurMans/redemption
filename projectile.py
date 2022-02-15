@@ -6,10 +6,12 @@ class Projectile(pygame.sprite.Sprite):
         super().__init__()
         self.velocity = 5
 
-        #position du projectile
+
         self.image = pygame.image.load('assets/bdf.png')
         self.image = pygame.transform.scale(self.image, (100,100))
         self.rect = self.image.get_rect()
+
+        # position du projectile par rapport à celui qui le lance
         self.largeur_image_combattant = combattant.image.get_width()
         self.hauteur_image_combattant = combattant.image.get_height()
         if combattant.est_allié:
