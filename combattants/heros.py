@@ -8,6 +8,7 @@ class Heros(Combattant):
     def __init__(self, jeu, est_allié=True):
         super().__init__(jeu)
         self.jeu = jeu
+        self.pv_max = 100
         self.pv = 100
         self.nom = 'Antoine'
         self.est_allié = est_allié

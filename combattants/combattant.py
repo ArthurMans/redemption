@@ -8,7 +8,7 @@ class Combattant(pygame.sprite.Sprite):
         super().__init__()
         self.jeu = jeu
         self.pv_max = 100
-        self.pv = self.pv_max
+        self.pv = 100
         self.nom = ''
         self.est_allié = est_allié
         # allié à gauche, ennemmi à droite

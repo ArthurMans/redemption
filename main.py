@@ -13,6 +13,7 @@ arriere_plan = pygame.image.load('assets/highnoondarkstar.jpg')
 arriere_plan = pygame.transform.scale(arriere_plan, (largeur_ecran, hauteur_ecran))
 jeu = Jeu()
 
+
 running = True
 
 while running:
@@ -20,22 +21,23 @@ while running:
     # appliquer la fenetre du jeu
     ecran.blit(arriere_plan, (0, 0))
 
-    # appliquer image combattant
-    ecran.blit(jeu.combattant.image, jeu.combattant.rect)
+    # appliquer image heros
+    ecran.blit(jeu.heros.image, jeu.heros.rect)
+
+    # appliquer images ennemis
+    jeu.tout_ennemis.draw(ecran)
 
     # actualisère barre de PV
-    for combattant in jeu.tout_combattants:
-        jeu.combattant.update_barre_de_vie(ecran)
+    for element in jeu.tout_combattants:
+        element.update_barre_de_vie(ecran)
 
-    #recuperer projectile du combattant
-    for projectile in jeu.combattant.all_projectiles:
+    #recuperer projectile du heros
+    for projectile in jeu.heros.all_projectiles:
         projectile.move()
 
     # appliquer l'ensemble des images des projectiles
-    jeu.combattant.all_projectiles.draw(ecran)
+    jeu.heros.all_projectiles.draw(ecran)
 
-
-    jeu.tout_ennemis.draw(ecran)
 
     pygame.display.flip()
 
@@ -44,13 +46,16 @@ while running:
             running = False
             pygame.quit()
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT and jeu.combattant.rect.x + jeu.combattant.rect.width < ecran.get_width():
-                jeu.combattant.bouger_a_droite()
-            elif event.key == pygame.K_LEFT and jeu.combattant.rect.x > 0:
-                jeu.combattant.bouger_a_gauche()
-            elif event.key == pygame.K_UP and jeu.combattant.rect.y > 0:
-                jeu.combattant.bouger_en_haut()
-            elif event.key == pygame.K_DOWN and jeu.combattant.rect.y + jeu.combattant.rect.height < ecran.get_height():
-                jeu.combattant.bouger_en_bas()
+            if event.key == pygame.K_ESCAPE:
+                running = False
+                pygame.quit()
+            if event.key == pygame.K_RIGHT and jeu.heros.rect.x + jeu.heros.rect.width < ecran.get_width():
+                jeu.heros.bouger_a_droite()
+            elif event.key == pygame.K_LEFT and jeu.heros.rect.x > 0:
+                jeu.heros.bouger_a_gauche()
+            elif event.key == pygame.K_UP and jeu.heros.rect.y > 0:
+                jeu.heros.bouger_en_haut()
+            elif event.key == pygame.K_DOWN and jeu.heros.rect.y + jeu.heros.rect.height < ecran.get_height():
+                jeu.heros.bouger_en_bas()
             if event.key == pygame.K_SPACE:
-                jeu.combattant.lancer_projectile()
+                jeu.heros.lancer_projectile()
