@@ -1,15 +1,15 @@
 import pygame
 from definition import *
 
+
 class Projectile(pygame.sprite.Sprite):
 
     def __init__(self, combattant):
         super().__init__()
         self.velocity = 5
 
-
         self.image = pygame.image.load('assets/bdf.png')
-        self.image = pygame.transform.scale(self.image, (100,100))
+        self.image = pygame.transform.scale(self.image, (100, 100))
         self.rect = self.image.get_rect()
 
         # position du projectile par rapport à celui qui le lance
@@ -31,7 +31,7 @@ class Projectile(pygame.sprite.Sprite):
         if self.combattant.est_allié:
             self.rect.x += self.velocity
 
-            #verifie si le projectile n'est plus sur l'ecran
+            # verifie si le projectile n'est plus sur l'ecran
             if self.rect.x > largeur_ecran:
                 self.remove()
         else:
@@ -40,3 +40,6 @@ class Projectile(pygame.sprite.Sprite):
             # verifie si le projectile n'est plus sur l'ecran
             if self.rect.x < 0:
                 self.remove()
+
+        if self.combattant.jeu.verif_collision(self, self.combattant.jeu.tout_ennemis):
+            self.remove()
