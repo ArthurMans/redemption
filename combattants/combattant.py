@@ -3,7 +3,7 @@ from projectile import Projectile
 
 class Combattant(pygame.sprite.Sprite):
 
-    def __init__(self, jeu):
+    def __init__(self, jeu, est_allié=True):
         super().__init__()
         self.jeu = jeu
         self.pv = 100

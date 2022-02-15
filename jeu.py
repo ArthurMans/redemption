@@ -5,7 +5,7 @@ from combattants.blob import Blob
 class Jeu:
 
     def __init__(self):
-        self.combattant = Combattant()
+        self.combattant = Combattant(self)
         self.tout_joueurs = pygame.sprite.Group()
         self.joueur = Combattant(self)
         self.tout_joueurs.add(self.joueur)
