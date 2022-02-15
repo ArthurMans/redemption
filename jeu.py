@@ -1,16 +1,18 @@
 import pygame
 from combattants.combattant import Combattant
 from combattants.blob import Blob
+from combattants.heros import Heros
 
 
 class Jeu:
 
     def __init__(self):
-        self.combattant = Combattant(self)
+        self.combattant = Heros(self)
         self.tout_combattants = pygame.sprite.Group()
-        self.joueur = Combattant(self)
-        self.tout_combattants.add(self.joueur)
-        self.tout_monstres = pygame.sprite.Group()
+        self.tout_combattants.add(self.combattant)
+        self.tout_ennemis = pygame.sprite.Group()
+        self.tout_alliés = pygame.sprite.Group()
+        self.tout_alliés.add(self.combattant)
         self.appui = {}
         self.spawn_blob()
 
@@ -19,5 +21,5 @@ class Jeu:
 
     def spawn_blob(self):
         blob = Blob(self)
-        self.tout_monstres.add(blob)
+        self.tout_ennemis.add(blob)
         self.tout_combattants.add(blob)

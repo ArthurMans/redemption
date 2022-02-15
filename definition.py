@@ -1,3 +1,3 @@
-largeur_ecran = 1080
+largeur_ecran = 1920
 
-hauteur_ecran = 720
+hauteur_ecran = 1020
