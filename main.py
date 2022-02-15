@@ -22,6 +22,10 @@ while running:
     #appliquer image combattant
     ecran.blit(jeu.combattant.image,jeu.combattant.rect)
 
+    # actualisère barre de PV
+    for combattant in jeu.tout_combattants:
+        jeu.combattant.update_barre_de_vie(ecran)
+
     #recuperer projectile du combattant
     for projectile in jeu.combattant.all_projectiles:
         projectile.move()
@@ -29,8 +33,6 @@ while running:
     #appliquer l'ensemble des images des projectiles
     jeu.combattant.all_projectiles.draw(ecran)
 
-    for blob in jeu.tout_monstres:
-         blob.avance()
 
     jeu.tout_monstres.draw(ecran)
 

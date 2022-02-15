@@ -6,7 +6,8 @@ class Combattant(pygame.sprite.Sprite):
     def __init__(self, jeu, est_allié=True):
         super().__init__()
         self.jeu = jeu
-        self.pv = 100
+        self.pv_max = 100
+        self.pv = self.pv_max
         self.nom = 'Antoine'
         self.est_allié = est_allié
         #allié à gauche, ennemmi à droite
@@ -22,6 +23,11 @@ class Combattant(pygame.sprite.Sprite):
         #self.perception
         #self.reactivite
         #self.parade
+
+    def update_barre_de_vie(self, surface):
+        longueur_barre_de_vie = 200
+        pygame.draw.rect(surface, (81, 71, 71), [self.rect.x, self.rect.y, longueur_barre_de_vie, 5])
+        pygame.draw.rect(surface, (44, 205, 44), [self.rect.x, self.rect.y, (self.pv*longueur_barre_de_vie) / self.pv_max, 5])
 
     def lancer_projectile(self):
         self.all_projectiles.add(Projectile(self))
