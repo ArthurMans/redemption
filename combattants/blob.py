@@ -1,9 +1,10 @@
 import pygame
+from combattants.combattant import Combattant
 
-class Blob(pygame.sprite.Sprite):
+class Blob(Combattant):
 
     def __init__(self, jeu):
-        super().__init__()
+        super().__init__(jeu)
         self.jeu = jeu
         self.pv = 30
         self.pv_max = 30
