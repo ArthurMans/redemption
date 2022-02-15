@@ -7,12 +7,12 @@ from combattants.heros import Heros
 class Jeu:
 
     def __init__(self):
-        self.combattant = Heros(self)
+        self.heros = Heros(self)
         self.tout_combattants = pygame.sprite.Group()
-        self.tout_combattants.add(self.combattant)
+        self.tout_combattants.add(self.heros)
         self.tout_ennemis = pygame.sprite.Group()
         self.tout_alliés = pygame.sprite.Group()
-        self.tout_alliés.add(self.combattant)
+        self.tout_alliés.add(self.heros)
         self.appui = {}
         self.spawn_blob()
 

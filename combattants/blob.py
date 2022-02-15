@@ -8,7 +8,7 @@ class Blob(Combattant):
         super().__init__(jeu)
         self.jeu = jeu
         self.pv_max = 30
-        self.pv = self.pv_max
+        self.pv = 30
         self.nom = 'Blob'
         self.image = pygame.image.load('assets/angry cat.png')
         self.rect = self.image.get_rect()
