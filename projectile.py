@@ -26,6 +26,9 @@ class Projectile(pygame.sprite.Sprite):
 
         self.puissance_competence = 10
 
+    def update(self):
+        self.move()
+
     def remove(self):
         self.combattant.all_projectiles.remove(self)
 

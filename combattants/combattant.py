@@ -7,6 +7,7 @@ class Combattant(pygame.sprite.Sprite):
     def __init__(self, jeu, est_allié=True):
         super().__init__()
         self.jeu = jeu
+        self.screen = self.jeu.screen
         self.pv_max = 100
         self.pv = 100
         self.nom = ''
@@ -36,6 +37,13 @@ class Combattant(pygame.sprite.Sprite):
 
         self.attaque_en_cours = False
 
+    def update(self):
+        return False
+
+    def draw(self):
+        self.screen.blit(self.image, self.rect)
+        self.barre_de_vie(self.screen)
+
     def vitesse_deplacement(self, combattant):
         dx = (combattant.rect.x - self.rect.x) * self.velocity
         dy = (combattant.rect.y - self.rect.y) * self.velocity
@@ -56,7 +64,7 @@ class Combattant(pygame.sprite.Sprite):
             self.kill()
 
 
-    def update_barre_de_vie(self, surface):
+    def barre_de_vie(self, surface):
         longueur_barre_de_vie = 200
         bon_placement_barre_hp = [self.rect.x, self.rect.y - 10, longueur_barre_de_vie, 5]
         bon_placement_barre_hp_coloré = [self.rect.x, self.rect.y - 10, (self.pv * longueur_barre_de_vie) / self.pv_max, 5]
