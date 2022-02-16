@@ -24,6 +24,8 @@ class Projectile(pygame.sprite.Sprite):
 
         self.combattant = combattant
 
+        self.puissance_competence = 10
+
     def remove(self):
         self.combattant.all_projectiles.remove(self)
 
@@ -41,5 +43,10 @@ class Projectile(pygame.sprite.Sprite):
             if self.rect.x < 0:
                 self.remove()
 
-        if self.combattant.jeu.verif_collision(self, self.combattant.jeu.tout_ennemis):
+        # Vérifie si le projectile touche un ennemi
+        for ennemi in self.combattant.jeu.verif_collision(self, self.combattant.jeu.tout_ennemis):
+            # retire le projectile
             self.remove()
+            # infliger des degats
+            ennemi.damage(self.puissance_competence * self.combattant.puissance)
+

@@ -23,3 +23,4 @@ class Jeu:
         blob = Blob(self)
         self.tout_ennemis.add(blob)
         self.tout_combattants.add(blob)
+
