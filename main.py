@@ -72,4 +72,4 @@ while running:
                 attaque_en_cours = True
                 dx, dy = jeu.heros.vitesse_deplacement(jeu.blob)
 
-    timer.tick(60)
+    timer.tick(FPS)

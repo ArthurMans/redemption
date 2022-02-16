@@ -11,8 +11,8 @@ class Combattant(pygame.sprite.Sprite):
         self.pv = 100
         self.nom = ''
 
-        self.est_allié = est_allié
         # allié à gauche, ennemmi à droite
+        self.est_allié = est_allié
         self.image = pygame.image.load('assets/player.png')
         self.rect = self.image.get_rect()
         self.all_projectiles = pygame.sprite.Group()
@@ -54,7 +54,6 @@ class Combattant(pygame.sprite.Sprite):
         if self.pv <= 0:
             # Supprimer combattant
             self.kill()
-
 
 
     def update_barre_de_vie(self, surface):

@@ -11,6 +11,7 @@ class Heros(Combattant):
         self.pv_max = 100
         self.pv = 100
         self.nom = 'Antoine'
+
         self.est_allié = est_allié
         self.image = pygame.image.load('assets/player.png')
         self.rect = self.image.get_rect()
