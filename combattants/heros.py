@@ -16,8 +16,8 @@ class Heros(Combattant):
         self.rect = self.image.get_rect()
         self.all_projectiles = pygame.sprite.Group()
         self.rect.x = 450
-        self.rect.y = 200
-        self.velocity = 30
+        self.rect.y = 500
+        self.velocity = 0.005
         # self.robustesse
         # self.puissance
         # self.endurance

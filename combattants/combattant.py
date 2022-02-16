@@ -18,7 +18,7 @@ class Combattant(pygame.sprite.Sprite):
         self.all_projectiles = pygame.sprite.Group()
         self.rect.x = 450
         self.rect.y = 200
-        self.velocity = 30
+        self.velocity = 0.005
 
         self.robustesse = 0.98
         self.puissance = 1
@@ -27,6 +27,25 @@ class Combattant(pygame.sprite.Sprite):
         # self.reactivite
         # self.parade
 
+        if self.est_allié:
+            self.groupe_allié = self.jeu.tout_alliés
+            self.groupe_ennemi = self.jeu.tout_ennemis
+        else:
+            self.groupe_allié = self.jeu.tout_ennemis
+            self.groupe_ennemi = self.jeu.tout_alliés
+
+        self.attaque_en_cours = False
+
+    def vitesse_deplacement(self, combattant):
+        dx = (combattant.rect.x - self.rect.x) * self.velocity
+        dy = (combattant.rect.y - self.rect.y) * self.velocity
+        return dx, dy
+
+
+    # def attaque_basique(self, combattant):
+    #     while
+
+
     def damage(self, montant):
         # infliger les degats
         self.pv -= montant * self.robustesse
@@ -34,11 +53,9 @@ class Combattant(pygame.sprite.Sprite):
         # vérifier si pv <=0
         if self.pv <= 0:
             # Supprimer combattant
-            self.jeu.tout_combattants.remove()
-            if self.est_allié:
-                self.jeu.tout_alliés.remove()
-            else:
-                self.jeu.tout_ennemis.remove()
+            self.kill()
+
+
 
     def update_barre_de_vie(self, surface):
         longueur_barre_de_vie = 200
@@ -78,3 +95,4 @@ class Combattant(pygame.sprite.Sprite):
     def bouger_en_bas(self):
         if not self.jeu.verif_collision(self, self.jeu.tout_ennemis):
             self.rect.y += self.velocity
+
