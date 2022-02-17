@@ -13,9 +13,9 @@ class Jeu:
         self.clock = clock
         self.width, self.height = self.screen.get_size()
 
-        self.tout_combattants = pygame.sprite.Group()
-        self.tout_ennemis = pygame.sprite.Group()
-        self.tout_alliés = pygame.sprite.Group()
+        self.tout_combattants = []
+        self.tout_ennemis = []
+        self.tout_alliés = []
 
         self.arriere_plan = pygame.image.load('assets/highnoondarkstar.jpg')
         self.arriere_plan = pygame.transform.scale(self.arriere_plan, (largeur_ecran, hauteur_ecran))
@@ -24,7 +24,9 @@ class Jeu:
         self.spawn_heros()
 
         self.blob = None
-        self.spawn_blob()
+        self.spawn_blob(largeur_ecran-600, hauteur_ecran/2)
+
+        self.spawn_blob(largeur_ecran-600, hauteur_ecran/3)
 
         self.attaque_en_cours = False
         self.dx, self.dy = 0, 0
@@ -33,6 +35,7 @@ class Jeu:
         self.playing = True
         while self.playing:
             self.clock.tick(FPS)
+            print(len(self.heros.all_projectiles))
             self.events()
             self.update()
             self.draw()
@@ -53,36 +56,30 @@ class Jeu:
                 self.attaque_en_cours = True
                 self.dx, self.dy = self.heros.vitesse_deplacement(self.blob)
         if self.attaque_en_cours:
-            if not self.verif_collision(self.heros, self.tout_ennemis):
-                self.heros.rect.x += self.dx
-                self.heros.rect.y += self.dy
-            else:
-                self.blob.damage(20)
-                self.attaque_en_cours = False
+            for ennemi in self.tout_ennemis:
+                if not self.heros.rect.colliderect(ennemi.rect):
+                    self.heros.rect.x += self.dx
+                    self.heros.rect.y += self.dy
+                else:
+                    ennemi.damage(20)
+                    self.attaque_en_cours = False
 
     def update(self):
         for combattant in self.tout_combattants:
             combattant.update()
-        for projectile in self.heros.all_projectiles:
-            projectile.move()
-
 
     def draw(self):  # Construction graphiques
         self.screen.blit(self.arriere_plan, (0, 0))
         for combattant in self.tout_combattants:
             combattant.draw()
-        self.heros.all_projectiles.draw(self.screen)
         pygame.display.flip()
 
-    def verif_collision(self, sprite, group):
-        return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
-
-    def spawn_blob(self):
-        self.blob = Blob(self)
-        self.tout_ennemis.add(self.blob)
-        self.tout_combattants.add(self.blob)
+    def spawn_blob(self, x, y):
+        self.blob = Blob(self, x, y)
+        self.tout_ennemis.append(self.blob)
+        self.tout_combattants.append(self.blob)
 
     def spawn_heros(self):
         self.heros = Heros(self)
-        self.tout_combattants.add(self.heros)
-        self.tout_alliés.add(self.heros)
+        self.tout_combattants.append(self.heros)
+        self.tout_alliés.append(self.heros)

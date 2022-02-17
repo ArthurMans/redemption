@@ -2,7 +2,7 @@ import pygame
 from projectile import Projectile
 
 
-class Combattant(pygame.sprite.Sprite):
+class Combattant():
 
     def __init__(self, jeu, est_allié=True):
         super().__init__()
@@ -14,9 +14,12 @@ class Combattant(pygame.sprite.Sprite):
 
         # allié à gauche, ennemmi à droite
         self.est_allié = est_allié
+
         self.image = pygame.image.load('assets/player.png')
         self.rect = self.image.get_rect()
-        self.all_projectiles = pygame.sprite.Group()
+
+        self.all_projectiles = []
+
         self.rect.x = 450
         self.rect.y = 200
         self.velocity = 0.005
@@ -53,6 +56,11 @@ class Combattant(pygame.sprite.Sprite):
     # def attaque_basique(self, combattant):
     #     while
 
+    def death(self):
+        for combattant in self.jeu.tout_combattants:
+            if combattant == self:
+                self.jeu.tout_combattants.pop()
+
 
     def damage(self, montant):
         # infliger les degats
@@ -61,7 +69,7 @@ class Combattant(pygame.sprite.Sprite):
         # vérifier si pv <=0
         if self.pv <= 0:
             # Supprimer combattant
-            self.kill()
+            self.death()
 
 
     def barre_de_vie(self, surface):
@@ -83,7 +91,7 @@ class Combattant(pygame.sprite.Sprite):
             pygame.draw.rect(surface, (236, 15, 15), bon_placement_barre_hp_coloré)
 
     def lancer_projectile(self):
-        self.all_projectiles.add(Projectile(self))
+        self.all_projectiles.append(Projectile(self, self.screen))
 
     def afficher_combattant(self):
         print("nom :", self.nom, "||  pv :", self.pv)
