@@ -5,18 +5,19 @@ from combattants.heros import Heros
 from jeu import Jeu
 from definition import *
 
+
 pygame.init()
 
 timer = pygame.time.Clock()
 
 pygame.display.set_caption("Redemption")
 ecran = pygame.display.set_mode((largeur_ecran, hauteur_ecran))
-bouton_attaque = pygame.image.load('assets/attaque.jpg')
 arriere_plan = pygame.image.load('assets/highnoondarkstar.jpg')
 arriere_plan = pygame.transform.scale(arriere_plan, (largeur_ecran, hauteur_ecran))
+
 jeu = Jeu()
 
-
+combattant_select = False
 running = True
 
 while running:
@@ -52,6 +53,7 @@ while running:
     pygame.display.flip()
 
     for event in pygame.event.get():
+        (mx, my) = pygame.mouse.get_pos()
         if event.type == pygame.QUIT:
             running = False
             pygame.quit()
@@ -70,18 +72,18 @@ while running:
                     jeu.heros.bouger_en_bas()
                 if event.key == pygame.K_SPACE:
                     jeu.heros.lancer_projectile()
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                xmin = jeu.blob.rect.x
-                xmax = jeu.blob.rect.x + jeu.blob.rect.width
-                ymin = jeu.blob.rect.y
-                ymax = jeu.blob.rect.y + jeu.blob.rect.height
-                if xmin <= pygame.mouse.get_pos()[0] <= xmax and ymin <= pygame.mouse.get_pos()[1] <= ymax:
-                    arriere_plan.blit(bouton_attaque, (850,1000))
-                    pos_bouton_attaque = bouton_attaque.get_rect(topleft=(850,1000))
-                if pos_bouton_attaque[0] <= pygame.mouse.get_pos()[0] <= pos_bouton_attaque[0]+pos_bouton_attaque[2] and pos_bouton_attaque[1] <= pygame.mouse.get_pos()[1] <= pos_bouton_attaque[1]+pos_bouton_attaque[3]:
-                    arriere_plan.blit(bouton_attaque, (0,0))
+        if not combattant_select:
+            if jeu.blob.rect.collidepoint((mx, my)) and event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                bouton1 = pygame.Rect(850, 1000, 200, 50)
+                arriere_plan.blit(jeu.bouton_attaque.image, (850, 1000))
+                combattant_select = True
+        if combattant_select:
+            if bouton1.collidepoint((mx, my)):
+                pygame.draw.rect(arriere_plan, (255, 255, 255), (850, 1000, 200, 50), 2)
+                if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                     attaque_en_cours = True
                     dx, dy = jeu.heros.vitesse_deplacement(jeu.blob)
+                    combattant_select = False
 
     timer.tick(FPS)
 

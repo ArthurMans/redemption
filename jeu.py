@@ -2,6 +2,7 @@ import pygame
 from combattants.combattant import Combattant
 from combattants.blob import Blob
 from combattants.heros import Heros
+from bouton import Bouton
 
 
 class Jeu:
@@ -12,6 +13,7 @@ class Jeu:
         self.tout_alliés = pygame.sprite.Group()
 
         self.appui = {}
+        self.bouton_attaque = Bouton(self)
 
         self.heros = None
         self.spawn_heros()
@@ -31,6 +33,8 @@ class Jeu:
         self.heros = Heros(self)
         self.tout_combattants.add(self.heros)
         self.tout_alliés.add(self.heros)
+
+
 
 
 
