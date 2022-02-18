@@ -5,6 +5,7 @@ from combattants.blob import Blob
 from combattants.heros import Heros
 from definition import *
 from bouton import Bouton
+from combat import Combat
 
 
 class Jeu:
