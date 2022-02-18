@@ -8,10 +8,10 @@ class Bouton():
         self.image = pygame.image.load('assets/attaque.jpg')
         self.rect = self.image.get_rect()
 
-    def events(self):
-        
-
-    def update(self):
+    #def events(self):
 
 
-    def draw(self):
+    #def update(self):
+
+
+    #def draw(self):
