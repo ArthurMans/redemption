@@ -4,6 +4,7 @@ from combattants.combattant import Combattant
 from combattants.blob import Blob
 from combattants.heros import Heros
 from definition import *
+from bouton import Bouton
 
 
 class Jeu:
@@ -13,6 +14,7 @@ class Jeu:
         self.clock = clock
         self.width, self.height = self.screen.get_size()
 
+        self.bouton_attaque = Bouton(self)
         self.tout_combattants = []
         self.tout_ennemis = []
         self.tout_alliés = []
@@ -73,13 +75,3 @@ class Jeu:
         for combattant in self.tout_combattants:
             combattant.draw()
         pygame.display.flip()
-
-    def spawn_blob(self, x, y):
-        self.blob = Blob(self, x, y)
-        self.tout_ennemis.append(self.blob)
-        self.tout_combattants.append(self.blob)
-
-    def spawn_heros(self):
-        self.heros = Heros(self)
-        self.tout_combattants.append(self.heros)
-        self.tout_alliés.append(self.heros)
