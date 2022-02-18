@@ -53,9 +53,9 @@ class Jeu:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                self.combat = Combat()
-                self.toutes_entités.append(bouton_attaque)
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:  # le joueur clique sur le bouton jouer
+                self.toutes_entités.append()
+                self.combat = Combat(self.toutes_entités)
                 self.combat.run()
 
     def update(self):

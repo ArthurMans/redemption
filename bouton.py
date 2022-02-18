@@ -4,14 +4,16 @@ from combattants.combattant import Combattant
 
 class Bouton(): #class Objet_cliquable(self):
 
-    def __init__(self, jeu, x, y):
+    def __init__(self, jeu, x, y, image, screen):
         self.entité_select = False
         self.jeu = jeu
+        self.screen = screen
         self.nom = ''
-        self.image = pygame.image.load('assets/attaque.jpg')
+        self.image = image
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
 
     def events(self):
         mx, my = pygame.mouse.get_pos()
@@ -32,8 +34,10 @@ class Bouton(): #class Objet_cliquable(self):
                 arriere_plan.blit(jeu.bouton_attaque.image, (850, 1000))
 
 
-    #def update(self):
+    def update(self):
+        return False
 
 
-    #def draw(self):
+    def draw(self):
+        return False
 
