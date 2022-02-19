@@ -16,9 +16,6 @@ class Jeu:
         self.width, self.height = self.screen.get_size()
 
         self.bouton_attaque = Bouton(self)
-        self.tout_combattants = []
-        self.tout_ennemis = []
-        self.tout_alliés = []
 
         self.arriere_plan = pygame.image.load('assets/highnoondarkstar.jpg')
         self.arriere_plan = pygame.transform.scale(self.arriere_plan, (largeur_ecran, hauteur_ecran))
@@ -53,8 +50,9 @@ class Jeu:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                self.combat = Combat()
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: #lancement d'un combat
+                self.liste_combattants = [self.heros, self.blob]
+                self.combat = Combat(self.screen, self.clock, self.liste_combattants)
                 self.toutes_entités.append(bouton_attaque)
                 self.combat.run()
 
