@@ -12,7 +12,7 @@ pygame.init()
 timer = pygame.time.Clock()
 
 pygame.display.set_caption("Redemption")
-screen = pygame.display.set_mode((largeur_screen, hauteur_screen))
+screen = pygame.display.set_mode((largeur_ecran, hauteur_ecran))
 jeu = Jeu(screen, timer)
 
 running = True

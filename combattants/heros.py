@@ -5,14 +5,13 @@ from definition import *
 
 class Heros(Combattant):
 
-    def __init__(self, jeu, est_allié=True):
-        super().__init__(jeu)
-        self.jeu = jeu
+    def __init__(self):
+        super().__init__()
         self.pv_max = 100
         self.pv = 100
         self.nom = 'Antoine'
 
-        self.est_allié = est_allié
+        self.est_allié = True
 
         self.image = pygame.image.load('assets/player.png')
         self.rect = self.image.get_rect()
