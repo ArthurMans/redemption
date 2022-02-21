@@ -4,12 +4,7 @@ from projectile import Projectile
 
 class Combattant():
 
-    def __init__(self, jeu, est_allié=True):
-        super().__init__()
-        self.jeu = jeu
-        self.screen = self.jeu.screen
-        self.pv_max = 100
-        self.pv = 100
+    def __init__(self, est_allié=True):
         self.nom = ''
 
         # allié à gauche, ennemmi à droite
@@ -24,19 +19,15 @@ class Combattant():
         self.rect.y = 200
         self.velocity = 0.005
 
-        self.robustesse = 0.98
+        # STATISTIQUES
+        self.pv_max = 100
+        self.pv = 100
+        self.robustesse = 0.98  # resiste à 2% des dégâts pour une robustesse de 0.98
         self.puissance = 1
         # self.endurance
         # self.perception
-        # self.reactivite
+        self.reactivite = 1  # plus la reactivite est grande plus le combattant réagit en premier dans un combat
         # self.parade
-
-        if self.est_allié:
-            self.groupe_allié = self.jeu.tout_alliés
-            self.groupe_ennemi = self.jeu.tout_ennemis
-        else:
-            self.groupe_allié = self.jeu.tout_ennemis
-            self.groupe_ennemi = self.jeu.tout_alliés
 
         self.attaque_en_cours = False
 
@@ -52,7 +43,6 @@ class Combattant():
         dy = (combattant.rect.y - self.rect.y) * self.velocity
         return dx, dy
 
-
     # def attaque_basique(self, combattant):
     #     while
 
@@ -60,7 +50,6 @@ class Combattant():
         for combattant in self.jeu.tout_combattants:
             if combattant == self:
                 self.jeu.tout_combattants.pop()
-
 
     def damage(self, montant):
         # infliger les degats
@@ -71,11 +60,11 @@ class Combattant():
             # Supprimer combattant
             self.death()
 
-
     def barre_de_vie(self, surface):
         longueur_barre_de_vie = 200
         bon_placement_barre_hp = [self.rect.x, self.rect.y - 10, longueur_barre_de_vie, 5]
-        bon_placement_barre_hp_coloré = [self.rect.x, self.rect.y - 10, (self.pv * longueur_barre_de_vie) / self.pv_max, 5]
+        bon_placement_barre_hp_coloré = [self.rect.x, self.rect.y - 10, (self.pv * longueur_barre_de_vie) / self.pv_max,
+                                         5]
         pygame.draw.rect(surface, (81, 71, 71), bon_placement_barre_hp)
         if self.pv >= 0.75 * self.pv_max:
             # afficher barre de hp verte quand t'es quasi full life
@@ -110,4 +99,3 @@ class Combattant():
     def bouger_en_bas(self):
         if not self.jeu.verif_collision(self, self.jeu.tout_ennemis):
             self.rect.y += self.velocity
-
