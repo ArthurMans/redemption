@@ -18,12 +18,6 @@ class Jeu:
         self.arriere_plan = pygame.image.load('assets/highnoondarkstar.jpg')
         self.arriere_plan = pygame.transform.scale(self.arriere_plan, (largeur_ecran, hauteur_ecran))
 
-        self.heros = Heros()
-        self.blob = Blob(largeur_ecran-600, hauteur_ecran/2)
-
-        self.attaque_en_cours = False
-        self.dx, self.dy = 0, 0
-
         self.toutes_entités = []
 
     def run(self):
@@ -44,7 +38,7 @@ class Jeu:
                     pygame.quit()
                     sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1: #lancement d'un combat
-                self.liste_combattants = [self.heros, self.blob]
+                self.liste_combattants = [Blob(largeur_ecran-600, hauteur_ecran/3, 2), Heros(), Blob(largeur_ecran-600, hauteur_ecran/2, 3)]
                 self.combat = Combat(self.screen, self.clock, self.liste_combattants)
                 self.combat.run()
 

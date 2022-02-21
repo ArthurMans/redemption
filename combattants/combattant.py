@@ -25,7 +25,7 @@ class Combattant():
         self.puissance = 1
         # self.endurance
         # self.perception
-        self.reactivite = 1  # moins la reactivite est grande plus le combattant réagit en premier dans un combat
+        self.reactivite = 1  # plus la reactivite est grande plus le combattant réagit en premier dans un combat
         # self.parade
 
         self.attaque_en_cours = False

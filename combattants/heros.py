@@ -19,9 +19,10 @@ class Heros(Combattant):
         self.rect.x = 450
         self.rect.y = 500
         self.velocity = 0.005
+
         # self.robustesse
         # self.puissance
         # self.endurance
         # self.perception
-        # self.reactivite
+        self.reactivite = 1
         # self.parade
