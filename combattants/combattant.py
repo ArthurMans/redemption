@@ -5,8 +5,6 @@ from projectile import Projectile
 class Combattant():
 
     def __init__(self, est_allié=True):
-        self.pv_max = 100
-        self.pv = 100
         self.nom = ''
 
         # allié à gauche, ennemmi à droite
@@ -21,6 +19,9 @@ class Combattant():
         self.rect.y = 200
         self.velocity = 0.005
 
+        # STATISTIQUES
+        self.pv_max = 100
+        self.pv = 100
         self.robustesse = 0.98  # resiste à 2% des dégâts pour une robustesse de 0.98
         self.puissance = 1
         # self.endurance

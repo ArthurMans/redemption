@@ -36,6 +36,9 @@ class Combat():
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     sys.exit()
+        #if self.liste_combattants[self.tour].owner == "IA":
+
+
 
     def update(self):
         if self.nouveau_tour:
